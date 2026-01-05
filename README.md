@@ -8,7 +8,7 @@ By default, systemd-resolved listens on port 53, which conflicts with tools like
 
 ## Installation
 ```bash
-sudo cp responder-dns-stub /usr/local/bin/
+sudo cp responder-dns-stub.sh /usr/local/bin/responder-dns-stub
 sudo chmod +x /usr/local/bin/responder-dns-stub
 ```
 
@@ -24,11 +24,11 @@ The script automatically detects the current state and switches to the opposite.
 ## Typical Workflow
 ```bash
 # Before pentest
-sudo responder-dns-stub                    # Disable DNS Stub (frees port 53)
+sudo responder-dns-stub                 # Disable DNS Stub (frees port 53)
 sudo python3 Responder.py -I tun0       # Run your tool
 
 # After pentest
-sudo responder-dns-stub                    # Re-enable DNS Stub (normal mode)
+sudo responder-dns-stub                 # Re-enable DNS Stub (normal mode)
 ```
 
 ## Verification
