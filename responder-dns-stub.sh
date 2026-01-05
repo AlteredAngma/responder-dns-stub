@@ -17,7 +17,7 @@ echo "Actual status: $CURRENT_STATE"
 echo ""
 
 if [ "$CURRENT_STATE" = "enabled" ]; then
-    echo "Désactivating DNS Stub"
+    echo "Enabling DNS Stub"
     
     
     if grep -q "^\[Resolve\]" "$CONFIG_FILE"; then
@@ -35,15 +35,15 @@ if [ "$CURRENT_STATE" = "enabled" ]; then
     fi
     
     systemctl restart systemd-resolved
-    echo "DNS Stub désactivated - Port 53 free for Responder"
+    echo "DNS Stub disabled - Port 53 free for Responder"
     
 else
-    echo "Activating DNS Stub..."
+    echo "Enabling DNS Stub..."
     
     sed -i 's/^DNSStubListener=no/#DNSStubListener=no/' "$CONFIG_FILE"
     
     systemctl restart systemd-resolved
-    echo "DNS Stub activated"
+    echo "DNS Stub enabled"
 fi
 
 echo ""
