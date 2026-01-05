@@ -1,23 +1,18 @@
 #!/bin/bash
-
 if [ "$EUID" -ne 0 ]; then 
     echo "Error: Use sudo"
     exit 1
 fi
-
 CONFIG_FILE="/etc/systemd/resolved.conf"
-
 if grep -q "^DNSStubListener=no" "$CONFIG_FILE" 2>/dev/null; then
     CURRENT_STATE="disabled"
 else
     CURRENT_STATE="enabled"
 fi
-
-echo "Actual status: $CURRENT_STATE"
+echo "Current status: $CURRENT_STATE"
 echo ""
-
 if [ "$CURRENT_STATE" = "enabled" ]; then
-    echo "Enabling DNS Stub"
+    echo "Disabling DNS Stub..."
     
     
     if grep -q "^\[Resolve\]" "$CONFIG_FILE"; then
@@ -45,7 +40,6 @@ else
     systemctl restart systemd-resolved
     echo "DNS Stub enabled"
 fi
-
 echo ""
 echo "Port 53 check:"
 ss -tulpn | grep :53
