@@ -1,4 +1,4 @@
-# Toggle DNS Stub
+# Responder DNS Stub
 
 A simple script to toggle systemd-resolved's DNS Stub Listener on/off, freeing port 53 for penetration testing tools like Responder.
 
@@ -8,15 +8,15 @@ By default, systemd-resolved listens on port 53, which conflicts with tools like
 
 ## Installation
 ```bash
-sudo cp toggle-dns-stub /usr/local/bin/
-sudo chmod +x /usr/local/bin/toggle-dns-stub
+sudo cp responder-dns-stub /usr/local/bin/
+sudo chmod +x /usr/local/bin/responder-dns-stub
 ```
 
 ## Usage
 
 Simply run the command to toggle between states:
 ```bash
-sudo toggle-dns-stub
+sudo responder-dns-stub
 ```
 
 The script automatically detects the current state and switches to the opposite.
@@ -24,11 +24,11 @@ The script automatically detects the current state and switches to the opposite.
 ## Typical Workflow
 ```bash
 # Before pentest
-sudo toggle-dns-stub                    # Disable DNS Stub (frees port 53)
+sudo responder-dns-stub                    # Disable DNS Stub (frees port 53)
 sudo python3 Responder.py -I tun0       # Run your tool
 
 # After pentest
-sudo toggle-dns-stub                    # Re-enable DNS Stub (normal mode)
+sudo responder-dns-stub                    # Re-enable DNS Stub (normal mode)
 ```
 
 ## Verification
